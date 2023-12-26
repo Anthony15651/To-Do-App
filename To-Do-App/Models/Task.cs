@@ -15,7 +15,7 @@ namespace To_Do_App.Models
 
         [StringLength(255)]
         [DisplayName("Description")]
-        public string description { get; set; }
+        public string? description { get; set; }
 
         [Required]
         [DisplayName("Priority")]
