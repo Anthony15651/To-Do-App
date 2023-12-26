@@ -1,5 +1,5 @@
-﻿using TaskModel = To_Do_App.Models.Task;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using To_Do_App.Models;
 
 namespace To_Do_App.Data
 {

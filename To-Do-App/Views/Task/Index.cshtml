@@ -1,0 +1,40 @@
+﻿@model List<TaskModel>
+
+<h1>Task List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>
+                Task Name
+            </th>
+            <th>
+                Task Description
+            </th>
+            <th>
+                Task Priority
+            </th>
+            <th>
+                Task Due Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td>
+                    @obj.taskName
+                </td>
+                <td>
+                    @obj.description
+                </td>
+                <td>
+                    @obj.priorityLevel
+                </td>
+                <td>
+                    @obj.dueDate
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

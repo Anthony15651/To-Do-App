@@ -12,8 +12,8 @@ using To_Do_App.Data;
 namespace To_Do_App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231226225029_SeedTaskTable")]
-    partial class SeedTaskTable
+    [Migration("20231226233845_CreateDbAndSeedData")]
+    partial class CreateDbAndSeedData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace To_Do_App.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("To_Do_App.Models.Task", b =>
+            modelBuilder.Entity("To_Do_App.Models.TaskModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

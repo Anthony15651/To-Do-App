@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace To_Do_App.Models
 {
-    public class Task
+    public class TaskModel
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        [DisplayName("Task")]
+        [DisplayName("Task Name")]
         public string taskName { get; set; }
 
         [StringLength(255)]

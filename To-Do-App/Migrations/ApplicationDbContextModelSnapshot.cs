@@ -22,7 +22,7 @@ namespace To_Do_App.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("To_Do_App.Models.Task", b =>
+            modelBuilder.Entity("To_Do_App.Models.TaskModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
