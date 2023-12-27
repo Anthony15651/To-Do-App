@@ -11,10 +11,28 @@ namespace To_Do_App.Controllers
         {
             _db = db;
         }
+
         public IActionResult Index()
         {
             List<TaskModel> objTaskList = _db.Tasks.ToList();
             return View(objTaskList);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(TaskModel obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Tasks.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "ToDo");
+            }
+            return View();
         }
     }
 }

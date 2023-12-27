@@ -1,0 +1,39 @@
+﻿@model TaskModel
+
+<h1>This is my Create Page</h1>
+
+
+<form method="post">
+    <div>
+        <input asp-for="taskName" />
+        <label asp-for="taskName"></label>
+        <span asp-validation-for="taskName" class="text-danger"></span>
+    </div>
+    <div>
+        <input asp-for="description" />
+        <label asp-for="description"></label>
+    </div>
+    <div>
+        <input asp-for="category" />
+        <label asp-for="category"></label>
+    </div>
+    <div>
+        <input asp-for="priorityLevel" />
+        <label asp-for="priorityLevel"></label>
+        <span asp-validation-for="priorityLevel" class="text-danger"></span>
+    </div>
+    <div>
+        <input asp-for="dueDate" />
+        <label asp-for="dueDate"></label>
+    </div>
+    <div>
+        <div>
+            <button type="submit">Create</button>
+        </div>
+        <div>
+            <a asp-controller="ToDo" asp-action="Index">
+                Back To List
+            </a>
+        </div>
+    </div>
+</form>
