@@ -4,10 +4,10 @@ using To_Do_App.Models;
 
 namespace To_Do_App.Controllers
 {
-    public class TaskController : Controller
+    public class ToDoController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public TaskController(ApplicationDbContext db)
+        public ToDoController(ApplicationDbContext db)
         {
             _db = db;
         }

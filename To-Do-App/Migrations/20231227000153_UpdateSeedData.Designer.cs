@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using To_Do_App.Data;
 
@@ -11,9 +12,11 @@ using To_Do_App.Data;
 namespace To_Do_App.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231227000153_UpdateSeedData")]
+    partial class UpdateSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,8 +61,6 @@ namespace To_Do_App.Migrations
                         {
                             Id = 1,
                             category = "Work",
-                            description = "Create basic CRUD functionality so ToDo list is usable",
-                            dueDate = new DateTime(1, 1, 1, 15, 30, 0, 0, DateTimeKind.Unspecified),
                             priorityLevel = "High",
                             taskName = "Finish Basic Functionality"
                         },
@@ -67,8 +68,6 @@ namespace To_Do_App.Migrations
                         {
                             Id = 2,
                             category = "Work",
-                            description = "Add additional user-friendly features to enhance ToDo App",
-                            dueDate = new DateTime(1, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             priorityLevel = "Medium",
                             taskName = "Add Additional Features"
                         });

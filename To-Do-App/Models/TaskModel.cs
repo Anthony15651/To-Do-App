@@ -22,8 +22,11 @@ namespace To_Do_App.Models
         [EnumDataType(typeof(PriorityLevel))]
         public string priorityLevel { get; set; }
 
-        [DisplayName("Due Date")]
+        [DisplayName("Time")]
         public DateTime? dueDate { get; set; }
+
+        [DisplayName("Category")]
+        public string? category { get; set; }
 
     }
 
