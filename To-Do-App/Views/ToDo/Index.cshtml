@@ -26,7 +26,7 @@
                                 @obj.dueDate
                             </div>
                             <div class="row">
-                                @obj.category
+                                @(obj.category ?? "No Category")
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     @obj.description
                 </td>
                 <td class="align-middle text-center col-2">
-                    @obj.priorityLevel
+                    @obj.priorityLevel <br />@("priority")
                 </td>
                 <td class="align-middle col-1">
                     <div class="container text-end">

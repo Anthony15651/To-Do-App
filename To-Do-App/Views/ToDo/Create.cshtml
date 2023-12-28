@@ -3,27 +3,31 @@
 <div class="text-center">
     <h1>Add a new task</h1>
     <form method="post">
-        <div>
-            <input asp-for="taskName" />
-            <label asp-for="taskName"></label>
+        <div class="form-group pb-4">
+            <label asp-for="taskName" class="form-label fs-3 mb-0">Task</label>
+            <input asp-for="taskName" class="form-control text-center" />
             <span asp-validation-for="taskName" class="text-danger"></span>
         </div>
-        <div>
-            <input asp-for="description" />
-            <label asp-for="description"></label>
+        <div class="form-group pb-4">
+            <label asp-for="description" class="form-label fs-3 mb-0"></label>
+            <input asp-for="description" class="form-control text-center" />
         </div>
-        <div>
-            <input asp-for="category" />
-            <label asp-for="category"></label>
+        <div class="form-group pb-4">
+            <label asp-for="category" class="form-label fs-3 mb-0"></label>
+            <select asp-for="category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control text-center">
+                <option value=""></option>
+            </select>
         </div>
-        <div>
-            <input asp-for="priorityLevel" />
-            <label asp-for="priorityLevel"></label>
+        <div class="form-group pb-4">
+            <label asp-for="priorityLevel" class="form-label fs-3 mb-0"></label>
+            <select asp-for="priorityLevel" asp-items="Html.GetEnumSelectList<PriorityLevel>()" class="form-control text-center">
+                <option value=""></option>
+            </select>
             <span asp-validation-for="priorityLevel" class="text-danger"></span>
         </div>
-        <div>
-            <input asp-for="dueDate" />
-            <label asp-for="dueDate"></label>
+        <div class="form-group pb-4">
+            <label asp-for="dueDate" class="form-label fs-3 mb-0"></label>
+            <input asp-for="dueDate" class="form-control text-center" />
         </div>
         <div>
             <div>

@@ -26,6 +26,7 @@ namespace To_Do_App.Models
         public DateTime? dueDate { get; set; }
 
         [DisplayName("Category")]
+        [EnumDataType(typeof(Category))]
         public string? category { get; set; }
 
     }
@@ -35,5 +36,14 @@ namespace To_Do_App.Models
         Low,
         Medium,
         High
+    }
+
+    public enum Category
+    {
+        Work,
+        Home,
+        School,
+        Appointment,
+        Other
     }
 }
