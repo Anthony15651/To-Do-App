@@ -1,7 +1,19 @@
 ﻿@model TaskModel
 
 <div class="text-center">
-    <h1>Add a new task</h1>
+    <div class="row d-flex">
+        <div class="col-3">
+
+        </div>
+        <div class="col-6">
+            <h1>Add a new task</h1>
+        </div>
+        <div class="col-3 fs-1 d-flex justify-content-end">
+            <a asp-controller="ToDo" asp-action="Index">
+                <i class="bi bi-x-circle-fill"></i>
+            </a>
+        </div>
+    </div>
     <form method="post">
         <div class="form-group pb-4">
             <label asp-for="taskName" class="form-label fs-3 mb-0">Task</label>
@@ -12,31 +24,28 @@
             <label asp-for="description" class="form-label fs-3 mb-0"></label>
             <input asp-for="description" class="form-control text-center" />
         </div>
-        <div class="form-group pb-4">
-            <label asp-for="category" class="form-label fs-3 mb-0"></label>
-            <select asp-for="category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control text-center">
-                <option value=""></option>
-            </select>
+        <div class="row">
+            <div class="form-group pb-4 col-4">
+                <label asp-for="category" class="form-label fs-3 mb-0"></label>
+                <select asp-for="category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control text-center">
+                    @* <option value=""></option> *@
+                </select>
+            </div>
+            <div class="form-group pb-4 col-4">
+                <label asp-for="priorityLevel" class="form-label fs-3 mb-0"></label>
+                <select asp-for="priorityLevel" asp-items="Html.GetEnumSelectList<PriorityLevel>()" class="form-control text-center">
+                </select>
+                <span asp-validation-for="priorityLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group pb-4 col-4">
+                <label asp-for="dueDate" class="form-label fs-3 mb-0"></label>
+                <input asp-for="dueDate" class="form-control text-center" />
+            </div>
         </div>
-        <div class="form-group pb-4">
-            <label asp-for="priorityLevel" class="form-label fs-3 mb-0"></label>
-            <select asp-for="priorityLevel" asp-items="Html.GetEnumSelectList<PriorityLevel>()" class="form-control text-center">
-                <option value=""></option>
-            </select>
-            <span asp-validation-for="priorityLevel" class="text-danger"></span>
-        </div>
-        <div class="form-group pb-4">
-            <label asp-for="dueDate" class="form-label fs-3 mb-0"></label>
-            <input asp-for="dueDate" class="form-control text-center" />
-        </div>
+        
         <div>
             <div>
-                <button type="submit">Create</button>
-            </div>
-            <div>
-                <a asp-controller="ToDo" asp-action="Index">
-                    Back To List
-                </a>
+                <button type="submit" class="btn btn-outline-secondary w-25">Add Task</button>
             </div>
         </div>
     </form>

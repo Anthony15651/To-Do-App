@@ -18,16 +18,17 @@ namespace To_Do_App.Models
         public string? description { get; set; }
 
         [Required]
-        [DisplayName("Priority")]
         [EnumDataType(typeof(PriorityLevel))]
-        public string priorityLevel { get; set; }
+        [DisplayName("Priority")]
+        public PriorityLevel priorityLevel { get; set; }
 
         [DisplayName("Time")]
         public DateTime? dueDate { get; set; }
 
-        [DisplayName("Category")]
+        [Required]
         [EnumDataType(typeof(Category))]
-        public string? category { get; set; }
+        [DisplayName("Category")]
+        public Category category { get; set; }
 
     }
 

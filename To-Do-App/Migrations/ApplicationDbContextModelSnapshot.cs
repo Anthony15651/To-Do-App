@@ -30,8 +30,8 @@ namespace To_Do_App.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("category")
+                        .HasColumnType("int");
 
                     b.Property<string>("description")
                         .HasMaxLength(255)
@@ -40,9 +40,8 @@ namespace To_Do_App.Migrations
                     b.Property<DateTime?>("dueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("priorityLevel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("priorityLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("taskName")
                         .IsRequired()
@@ -57,19 +56,19 @@ namespace To_Do_App.Migrations
                         new
                         {
                             Id = 1,
-                            category = "Work",
+                            category = 0,
                             description = "Create basic CRUD functionality so ToDo list is usable",
                             dueDate = new DateTime(1, 1, 1, 15, 30, 0, 0, DateTimeKind.Unspecified),
-                            priorityLevel = "High",
+                            priorityLevel = 2,
                             taskName = "Finish Basic Functionality"
                         },
                         new
                         {
                             Id = 2,
-                            category = "Work",
+                            category = 0,
                             description = "Add additional user-friendly features to enhance ToDo App",
                             dueDate = new DateTime(1, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            priorityLevel = "Medium",
+                            priorityLevel = 2,
                             taskName = "Add Additional Features"
                         });
                 });

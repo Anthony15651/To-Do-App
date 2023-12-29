@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace To_Do_App.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDbAndSeedData : Migration
+    public partial class CreateAndSeedDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,8 +21,9 @@ namespace To_Do_App.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     taskName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    priorityLevel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    dueDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    priorityLevel = table.Column<int>(type: "int", nullable: false),
+                    dueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    category = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +32,11 @@ namespace To_Do_App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tasks",
-                columns: new[] { "Id", "description", "dueDate", "priorityLevel", "taskName" },
+                columns: new[] { "Id", "category", "description", "dueDate", "priorityLevel", "taskName" },
                 values: new object[,]
                 {
-                    { 1, null, null, "High", "Finish Basic Functionality" },
-                    { 2, null, null, "Medium", "Add Additional Features" }
+                    { 1, 0, "Create basic CRUD functionality so ToDo list is usable", new DateTime(1, 1, 1, 15, 30, 0, 0, DateTimeKind.Unspecified), 2, "Finish Basic Functionality" },
+                    { 2, 0, "Add additional user-friendly features to enhance ToDo App", new DateTime(1, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), 2, "Add Additional Features" }
                 });
         }
 

@@ -4,7 +4,7 @@
     <div class="row d-flex">
         <h1 class="col-10">My ToDo List:</h1>
         <div class="col-1 fs-1 d-flex justify-content-end">
-            <i class="bi bi-filter-circle-fill align-self-end"></i>
+            <i class="bi bi-filter-circle-fill"></i>
         </div>
         <div class="col-1 fs-1 d-flex justify-content-end">
             <a asp-controller="ToDo" asp-action="Create"><i class="bi bi-plus-circle-fill"></i></a>
@@ -26,7 +26,7 @@
                                 @obj.dueDate
                             </div>
                             <div class="row">
-                                @(obj.category ?? "No Category")
+                                @obj.category
                             </div>
                         </div>
                     </div>
