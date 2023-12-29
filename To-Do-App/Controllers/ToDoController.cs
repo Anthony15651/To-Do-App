@@ -34,5 +34,33 @@ namespace To_Do_App.Controllers
             }
             return View();
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                return NotFound();
+            }
+            TaskModel? taskModelFromDb = _db.Tasks.Find(id);
+            if(taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(taskModelFromDb);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TaskModel taskModelObj)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Tasks.Update(taskModelObj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "ToDo");
+            }
+            return View();
+        }
+
+        
     }
 }
