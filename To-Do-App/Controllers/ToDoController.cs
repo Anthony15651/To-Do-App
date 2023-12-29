@@ -61,6 +61,32 @@ namespace To_Do_App.Controllers
             return View();
         }
 
-        
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            TaskModel? taskModelFromDb = _db.Tasks.Find(id);
+            if (taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("Index", "ToDo");
+        }
+
+        [HttpPost, ActionName("DeleteTask")]
+        public IActionResult DeletePOST(int? taskId)
+        {
+            TaskModel? taskModelFromDb = _db.Tasks.Find(taskId);
+            if (taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.Tasks.Remove(taskModelFromDb);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "ToDo");
+        }
     }
 }

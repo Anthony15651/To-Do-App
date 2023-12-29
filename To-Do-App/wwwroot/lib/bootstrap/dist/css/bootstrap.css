@@ -6234,6 +6234,7 @@ textarea.form-control-lg {
     position: relative;
     flex: 1 1 auto;
     padding: var(--bs-modal-padding);
+    margin-top: -25px; /* Added negative margin to reduce gap between body and title */
 }
 
 .modal-footer {
@@ -6244,7 +6245,7 @@ textarea.form-control-lg {
     justify-content: flex-end;
     padding: calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5);
     background-color: var(--bs-modal-footer-bg);
-    border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color);
+    /* border-top: var(--bs-modal-footer-border-width) solid var(--bs-modal-footer-border-color); - Disabling border */
     border-bottom-right-radius: var(--bs-modal-inner-border-radius);
     border-bottom-left-radius: var(--bs-modal-inner-border-radius);
 }
