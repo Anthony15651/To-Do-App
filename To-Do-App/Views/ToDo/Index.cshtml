@@ -5,7 +5,18 @@
     <div class="row d-flex">
         <h1 class="col-10">My ToDo List:</h1>
         <div class="col-1 fs-1 d-flex justify-content-end">
-            <i class="bi bi-filter-circle-fill"></i>
+            @* <div class="dropdown"> *@
+            <div class="dropend">
+                <a asp-action="" data-bs-toggle="dropdown"><i class="bi bi-filter-circle-fill"></i></a>
+                <ul class="dropdown-menu">
+                @* <ul class="dropdown-menu dropdown-menu-end ms-5"> - To switch to menu *almost* centered below *@
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["IdSortParam"]">Order Entered</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["CategorySortParam"]">Category</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["TaskNameSortParam"]">Alphabetical</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["PrioritySortParam"]">Priority</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["DueDateSortParam"]">Date</a></li>
+                </ul>
+            </div>
         </div>
         <div class="col-1 fs-1 d-flex justify-content-end">
             <a asp-controller="ToDo" asp-action="Create"><i class="bi bi-plus-circle-fill"></i></a>

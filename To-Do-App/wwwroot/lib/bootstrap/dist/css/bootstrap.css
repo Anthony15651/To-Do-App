@@ -3852,7 +3852,7 @@ textarea.form-control-lg {
     margin: 0;
     font-size: var(--bs-dropdown-font-size);
     color: var(--bs-dropdown-color);
-    text-align: left;
+    text-align: center; /* Adjusted to center from left */
     list-style: none;
     background-color: var(--bs-dropdown-bg);
     background-clip: padding-box;
