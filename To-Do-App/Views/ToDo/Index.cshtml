@@ -3,7 +3,7 @@
 <!-- Table Header -->
 <div class="container">
     <div class="row d-flex">
-        <h1 class="col-10">My ToDo List:</h1>
+        <h1 class="col-10 ps-0">My ToDo List:</h1>
         <div class="col-1 fs-1 d-flex justify-content-end">
             @* <div class="dropdown"> *@
             <div class="dropend">
@@ -40,7 +40,8 @@
                                 @obj.taskName
                             </div>
                             <div class="row">
-                                @obj.dueDate
+                                <!-- Time formatted to remove "seconds" -->
+                                @obj.dueDate?.ToString("MM/dd/yyyy hh:mm tt")
                             </div>
                             <div class="row">
                                 @obj.category
@@ -168,17 +169,20 @@
         $('a[data-task-id]').on('click', function (e) {
             e.preventDefault();
             var taskId = $(this).data('task-id');
-            var clickedRow = $(this).closest('tr'); // Get the clicked row
+            var clickedRow = $(this).closest('tr');
             $.post('/ToDo/ToggleCompletion', { taskId: taskId }, function (data) {
                 if (data.success) {
                     if (data.isComplete) {
-                        $('#completedTasks tbody').append(clickedRow); // Move to Completed table
+                        // Move to Completed table and updat icon to be checked
+                        clickedRow.find('i').removeClass('bi-circle').addClass('bi-check-circle-fill');
+                        $('#completedTasks tbody').append(clickedRow); 
                     } else {
-                        $('#toDoTasks tbody').append(clickedRow); // Move back to ToDo table
+                        // Move to ToDo table and update icon to be open circle
+                        clickedRow.find('i').removeClass('bi-check-circle-fill').addClass('bi-circle');
+                        $('#toDoTasks tbody').append(clickedRow);
                     }
-                    window.location.reload();
                 } else {
-                    alert('Error toggling completion status.');
+                    console.log('Error toggling completion status.');
                 }
             });
         });
