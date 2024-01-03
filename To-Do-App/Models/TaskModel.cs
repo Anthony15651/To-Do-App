@@ -23,7 +23,6 @@ namespace To_Do_App.Models
         public PriorityLevel priorityLevel { get; set; }
 
         [DisplayName("Time")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:h:mm tt}")]
         public DateTime? dueDate { get; set; }
 
         [Required]
