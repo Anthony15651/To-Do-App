@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using To_Do_App.Data;
 using To_Do_App.Models;
 
@@ -132,6 +133,21 @@ namespace To_Do_App.Controllers
             _db.Tasks.Remove(taskModelFromDb);
             _db.SaveChanges();
             return RedirectToAction("Index", "ToDo");
+        }
+
+        [HttpPost]
+        public IActionResult ToggleCompletion(int taskId)
+        {
+            TaskModel taskModel = _db.Tasks.Find(taskId);
+            if (taskModel == null)
+            {
+                return Json(new { Success = false });
+            }
+            taskModel.isComplete = !taskModel.isComplete;
+            _db.SaveChanges();
+
+            //return RedirectToAction("Index", "ToDo");
+            return Json(new { success = true, isComplete = taskModel.isComplete });
         }
     }
 }

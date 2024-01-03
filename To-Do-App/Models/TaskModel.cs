@@ -30,6 +30,9 @@ namespace To_Do_App.Models
         [DisplayName("Category")]
         public Category category { get; set; }
 
+        [DisplayName("Completed")]
+        public bool isComplete { get; set; }
+
     }
 
     public enum PriorityLevel

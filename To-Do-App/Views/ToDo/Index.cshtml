@@ -23,13 +23,17 @@
         </div>
     </div>
 </div>
-<!-- Table (Task List) -->
-<table class="table table-striped border border-primary">
+
+<!-- Table (ToDo Task List) -->
+<table class="table table-striped border border-primary" id="toDoTasks">
     <tbody>
-        @foreach(var obj in Model)
+        @foreach (var obj in Model.Where(task => !task.isComplete))
         {
             <tr>
-                <td class="col-4">
+                <td class="col-1 text-center align-middle">
+                    <a asp-action="ToggleCompletion" data-task-id="@obj.Id"><i class="bi bi-circle fs-1"></i></a>
+                </td>
+                <td class="col-3">
                     <div class="container">
                         <div class="col">
                             <div class="row fs-3">
@@ -65,6 +69,56 @@
     </tbody>
 </table>
 
+
+<!-- Table (Completed Task List) -->
+@if (Model.Any(task => task.isComplete))
+{
+    <h1 class="col-10">Completed:</h1>
+    <table class="table table-striped border border-primary" id="completedTasks">
+        <tbody>
+            @foreach (var obj in Model.Where(task => task.isComplete))
+            {
+                <tr>
+                    <td class="col-1 text-center align-middle">
+                        <a asp-action="ToggleCompletion" data-task-id="@obj.Id"><i class="bi bi-check-circle-fill fs-1"></i></a>
+                    </td>
+                    <td class="col-3">
+                        <div class="container">
+                            <div class="col">
+                                <div class="row fs-3">
+                                    @obj.taskName
+                                </div>
+                                <div class="row">
+                                    @obj.dueDate
+                                </div>
+                                <div class="row">
+                                    @obj.category
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="align-middle text-center col-4">
+                        @obj.description
+                    </td>
+                    <td class="align-middle text-center col-2">
+                        @obj.priorityLevel <br />@("priority")
+                    </td>
+                    <td class="align-middle col-1">
+                        <div class="container text-end">
+                            <div class="fs-2">
+                                <a asp-controller="ToDo" asp-action="Edit" asp-route-id="@obj.Id"><i class="bi bi-pencil-square"></i></a>
+                            </div>
+                            <div class="fs-2">
+                                <a asp-action="" data-bs-toggle="modal" data-bs-target="#deleteModal" data-task-id="@obj.Id"><i class="bi bi-trash-fill"></i></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
@@ -82,9 +136,8 @@
     </div>
 </div>
 
-<!-- Script to handle delete button in modal -->
 <script>
-    
+    // Script to handle delete button in modal
     document.addEventListener('DOMContentLoaded', function () {
         $('#deleteModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -105,6 +158,27 @@
                 error: function (error) {
                     // Handle errors, display an error message, and check the console for more details
                     console.error('Error deleting task: ' + error.statusText);
+                }
+            });
+        });
+    });
+
+    // Script to handle check button
+    $(document).ready(function () {
+        $('a[data-task-id]').on('click', function (e) {
+            e.preventDefault();
+            var taskId = $(this).data('task-id');
+            var clickedRow = $(this).closest('tr'); // Get the clicked row
+            $.post('/ToDo/ToggleCompletion', { taskId: taskId }, function (data) {
+                if (data.success) {
+                    if (data.isComplete) {
+                        $('#completedTasks tbody').append(clickedRow); // Move to Completed table
+                    } else {
+                        $('#toDoTasks tbody').append(clickedRow); // Move back to ToDo table
+                    }
+                    window.location.reload();
+                } else {
+                    alert('Error toggling completion status.');
                 }
             });
         });
