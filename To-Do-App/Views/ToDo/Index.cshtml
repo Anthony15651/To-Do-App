@@ -168,23 +168,26 @@
     $(document).ready(function () {
         $('a[data-task-id]').on('click', function (e) {
             e.preventDefault();
-            var taskId = $(this).data('task-id');
-            var clickedRow = $(this).closest('tr');
-            $.post('/ToDo/ToggleCompletion', { taskId: taskId }, function (data) {
-                if (data.success) {
-                    if (data.isComplete) {
-                        // Move to Completed table and updat icon to be checked
-                        clickedRow.find('i').removeClass('bi-circle').addClass('bi-check-circle-fill');
-                        $('#completedTasks tbody').append(clickedRow); 
+            // "if" to make sure clicking delete icon does not toggle completion status
+            if ($(this).find('i').hasClass('bi-trash-fill') == false) {
+                var taskId = $(this).data('task-id');
+                var clickedRow = $(this).closest('tr');
+                $.post('/ToDo/ToggleCompletion', { taskId: taskId }, function (data) {
+                    if (data.success) {
+                        if (data.isComplete) {
+                            // Move to Completed table and updat icon to be checked
+                            clickedRow.find('i').removeClass('bi-circle').addClass('bi-check-circle-fill');
+                            $('#completedTasks tbody').append(clickedRow);
+                        } else {
+                            // Move to ToDo table and update icon to be open circle
+                            clickedRow.find('i').removeClass('bi-check-circle-fill').addClass('bi-circle');
+                            $('#toDoTasks tbody').append(clickedRow);
+                        }
                     } else {
-                        // Move to ToDo table and update icon to be open circle
-                        clickedRow.find('i').removeClass('bi-check-circle-fill').addClass('bi-circle');
-                        $('#toDoTasks tbody').append(clickedRow);
+                        console.log('Error toggling completion status.');
                     }
-                } else {
-                    console.log('Error toggling completion status.');
-                }
-            });
+                });
+            }
         });
     });
 </script>
