@@ -137,9 +137,8 @@
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
     // Script to handle delete button in modal
     document.addEventListener('DOMContentLoaded', function () {
@@ -148,17 +147,23 @@
             var taskId = button.data('task-id');
             var modal = $(this);
             modal.find('#confirmDelete').attr('data-task-id', taskId);
+            console.log(taskId);
         });
 
         $('#confirmDelete').click(function () {
             var taskId = $(this).data('task-id');
+            // Finds the matching row to remove from table
+            var rowToRemove = $('#toDoTasks').find('tr').has('a[data-task-id="' + taskId + '"]');
+            console.log(rowToRemove);
             $.ajax({
                 url: "/ToDo/DeleteTask/",
                 method: "POST",
                 data: { taskId: taskId },
                 success: function (result) {
                     toastr.success('Task deleted successfully');
-                    window.location.reload();
+                    rowToRemove.remove();
+                    $('#deleteModal').modal('hide');
+                    // window.location.reload(); - Don't want to use so that the toastr notification will pop up
                 },
                 error: function (error) {
                     // Handle errors, display an error message, and check the console for more details
