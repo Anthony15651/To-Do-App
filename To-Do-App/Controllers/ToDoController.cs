@@ -76,6 +76,7 @@ namespace To_Do_App.Controllers
             {
                 _db.Tasks.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Task created successfully";
                 return RedirectToAction("Index", "ToDo");
             }
             return View();
@@ -102,6 +103,7 @@ namespace To_Do_App.Controllers
             {
                 _db.Tasks.Update(taskModelObj);
                 _db.SaveChanges();
+                TempData["success"] = "Task updated successfully";
                 return RedirectToAction("Index", "ToDo");
             }
             return View();
@@ -138,16 +140,16 @@ namespace To_Do_App.Controllers
         [HttpPost]
         public IActionResult ToggleCompletion(int taskId)
         {
-            TaskModel taskModel = _db.Tasks.Find(taskId);
-            if (taskModel == null)
+            TaskModel taskModelFromDb = _db.Tasks.Find(taskId);
+            if (taskModelFromDb == null)
             {
                 return Json(new { Success = false });
             }
-            taskModel.isComplete = !taskModel.isComplete;
+            taskModelFromDb.isComplete = !taskModelFromDb.isComplete;
             _db.SaveChanges();
 
             //return RedirectToAction("Index", "ToDo");
-            return Json(new { success = true, isComplete = taskModel.isComplete });
+            return Json(new { success = true, isComplete = taskModelFromDb.isComplete });
         }
     }
 }

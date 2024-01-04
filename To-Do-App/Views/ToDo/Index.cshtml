@@ -137,6 +137,9 @@
     </div>
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <script>
     // Script to handle delete button in modal
     document.addEventListener('DOMContentLoaded', function () {
@@ -154,6 +157,7 @@
                 method: "POST",
                 data: { taskId: taskId },
                 success: function (result) {
+                    toastr.success('Task deleted successfully');
                     window.location.reload();
                 },
                 error: function (error) {
