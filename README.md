@@ -145,13 +145,18 @@
         
 <h1 id="Additional Features">Additional Features</h1>
 <ul>
-  <li><h4>Sorting Options</h4></li>
+  <li><h3>Sorting Options</h3></li>
 </ul>
     <p>To provide users with greater control over their to-do list, I implemented the option to sort tasks based on the properties of the task model. Users can easily arrange tasks in ascending or descending order by selecting the filter option and then choosing the desired property.</p>
 
-    ![ToDo Sorting Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoSorting.gif)
+![ToDo Sorting Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoSorting.gif)
+
 <ul>
-  <li><h4>Toastr Notifications</h4></li>
+  <li><h3>Sorting Options</h3></li>
+</ul>
+
+<ul>
+  <li><h3>Toastr Notifications</h3></li>
 </ul>
 
 <h1 id="Key Takeaways">Key Takeaways</h1>
