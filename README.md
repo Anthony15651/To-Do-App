@@ -3,7 +3,6 @@
     <li><a href="#Introduction">Introduction</a></li>
     <li><a href="#CRUD Operations">CRUD Operations</a></li>
     <li><a href="#Additional Features">Additional Features</a></li>
-    <li><a href="#Key Takeaways">Key Takeaways</a></li>
 </ul>
 
 <h1 id="Introduction">Introduction</h1>
@@ -249,8 +248,6 @@
             </tbody>
         </table>
 
-
-        
         // Script to handle check button
         $(document).ready(function () {
             $('a[data-task-id]').on('click', function (e) {
@@ -278,9 +275,28 @@
             });
         });
 
+![ToDo Completion Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoCompletion.gif)
 
-<ul>
-  <li><h3>Toastr Notifications</h3></li>
-</ul>
+<h3>Toastr Notifications</h3>
+<p>To remove any uncertainty upon creating, updating, or deleting a task, I implemented Toastr notifications. These notifications provide a small pop-up confirmation of success. To avoid repeating the same code throughout my cshtml pages, I used a partial view and referenced that within my _Layout.cshtml page.</p>
 
-<h1 id="Key Takeaways">Key Takeaways</h1>
+        @if (TempData["success"] != null)
+        {
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script type="text/javascript">
+                toastr.success('@TempData["success"]');
+            </script>
+        
+        }
+        
+        @if (TempData["error"] != null)
+        {
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script type="text/javascript">
+                toastr.error('@TempData["error"]');
+            </script>
+        }
+
+![ToDo Toastr Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoToastr.gif)
