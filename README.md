@@ -214,7 +214,7 @@
         
 <h1 id="Additional Features">Additional Features</h1>
 <ul>
-  <li>Sorting Options</li>
+  <li><h5>Sorting Options</h5></li>
 </ul>
 <ul>
   <li>Toastr Notifications</li>
