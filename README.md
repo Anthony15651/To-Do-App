@@ -144,7 +144,7 @@
         }
         
 <h1 id="Additional Features">Additional Features</h1>
-><h3>Sorting Options</h3>
+<h3>Sorting Options</h3>
 <p>To provide users with greater control over their to-do list, I implemented the option to sort tasks based on the properties of the task model. Users can easily arrange tasks in ascending or descending order by selecting the filter option and then choosing the desired property.</p>
 
         public IActionResult Index(string sortOrder)
@@ -201,7 +201,7 @@
 ![ToDo Sorting Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoSorting.gif)
 
 <h3>Task Completion</h3>
-<p>Rather than having users delete tasks after completing them, I created a way to check them off the list. By doing so, the task is moved to a "Completed" section, allowing users to review completed tasks or uncheck them if needed. At first, I was reloading the page each time a task was checked to update the lists, but this approach felt choppy and would cause the page to jump around. To overcome this, I used JQuery and AJAX to update the DOM each time a task is marked complete/uncomplete, resulting in a smooth transition as tasks move between lists. </p>
+<p>Rather than having users delete tasks after completing them, I created a way to check them off the list. By doing so, the task is moved to a "Completed" section, allowing users to review completed tasks or uncheck them if needed. At first, I was reloading the page each time a task was checked to update the lists, but this approach felt choppy and would cause the page to jump around. To overcome this, I used jQuery and AJAX to update the DOM each time a task is marked complete/uncomplete, resulting in a smooth transition as tasks move between lists. </p>
 
         <!-- Table (ToDo Task List) -->
         <table class="table table-striped border border-primary" id="toDoTasks">
@@ -249,6 +249,8 @@
             </tbody>
         </table>
 
+
+        
         // Script to handle check button
         $(document).ready(function () {
             $('a[data-task-id]').on('click', function (e) {
