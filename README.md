@@ -62,162 +62,96 @@
             Appointment
         }
 
-<h4>ToDo Controller:</h4>
+<h4>ToDo Controller (CRUD operations):</h4>
 
-        public class ToDoController : Controller
+        private readonly ApplicationDbContext _db;
+        public ToDoController(ApplicationDbContext db)
         {
-            private readonly ApplicationDbContext _db;
-            public ToDoController(ApplicationDbContext db)
+            _db = db;
+        }
+     
+        public IActionResult Create()
+        {
+            return View();
+        }
+    
+        [HttpPost]
+        public IActionResult Create(TaskModel obj)
+        {
+            if (ModelState.IsValid)
             {
-                _db = db;
-            }
-        
-            public IActionResult Index(string sortOrder)
-            {
-                ViewData["IdSortParam"] = string.IsNullOrEmpty(sortOrder) || sortOrder != "id_desc" ? "id_desc" : "id";
-                ViewData["CategorySortParam"] = sortOrder == "category" ? "category_desc" : "category";
-                ViewData["TaskNameSortParam"] = sortOrder == "taskName" ? "taskName_desc" : "taskName";
-                ViewData["PrioritySortParam"] = sortOrder == "priority" ? "priority_desc" : "priority";
-                ViewData["DueDateSortParam"] = sortOrder == "dueDate" ? "dueDate_desc" : "dueDate";
-        
-                IQueryable<TaskModel> tasks = _db.Tasks.AsQueryable();
-        
-                switch (sortOrder)
-                {
-                    case "id":
-                        tasks = tasks.OrderBy(task => task.Id);
-                        break;
-                    case "id_desc":
-                        tasks = tasks.OrderByDescending(task => task.Id);
-                        break;
-                    case "category":
-                        tasks = tasks.OrderBy(task => task.category);
-                        break;
-                    case "category_desc":
-                        tasks = tasks.OrderByDescending(task => task.category);
-                        break;
-                    case "taskName":
-                        tasks = tasks.OrderBy(task => task.taskName);
-                        break;
-                    case "taskName_desc":
-                        tasks = tasks.OrderByDescending(task => task.taskName);
-                        break;
-                    case "priority":
-                        tasks = tasks.OrderBy(task => task.priorityLevel);
-                        break;
-                    case "priority_desc":
-                        tasks = tasks.OrderByDescending(task => task.priorityLevel);
-                        break;
-                    case "dueDate":
-                        tasks = tasks.OrderBy(task => task.dueDate);
-                        break;
-                    case "dueDate_desc":
-                        tasks = tasks.OrderByDescending(task => task.dueDate);
-                        break;
-                    default:
-                        tasks = tasks.OrderByDescending(task => task.Id);
-                        break;
-                }
-        
-                List<TaskModel> objTaskList = tasks.ToList();
-                return View(objTaskList);
-            }
-        
-            public IActionResult Create()
-            {
-                return View();
-            }
-        
-            [HttpPost]
-            public IActionResult Create(TaskModel obj)
-            {
-                if (ModelState.IsValid)
-                {
-                    _db.Tasks.Add(obj);
-                    _db.SaveChanges();
-                    TempData["success"] = "Task created successfully";
-                    return RedirectToAction("Index", "ToDo");
-                }
-                return View();
-            }
-        
-            public IActionResult Edit(int? id)
-            {
-                if(id == null || id == 0)
-                {
-                    return NotFound();
-                }
-                TaskModel? taskModelFromDb = _db.Tasks.Find(id);
-                if(taskModelFromDb == null)
-                {
-                    return NotFound();
-                }
-                return View(taskModelFromDb);
-            }
-        
-            [HttpPost]
-            public IActionResult Edit(TaskModel taskModelObj)
-            {
-                if(ModelState.IsValid)
-                {
-                    _db.Tasks.Update(taskModelObj);
-                    _db.SaveChanges();
-                    TempData["success"] = "Task updated successfully";
-                    return RedirectToAction("Index", "ToDo");
-                }
-                return View();
-            }
-        
-            public IActionResult Delete(int? id)
-            {
-                if (id == null || id == 0)
-                {
-                    return NotFound();
-                }
-                TaskModel? taskModelFromDb = _db.Tasks.Find(id);
-                if (taskModelFromDb == null)
-                {
-                    return NotFound();
-                }
-        
+                _db.Tasks.Add(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Task created successfully";
                 return RedirectToAction("Index", "ToDo");
             }
-        
-            [HttpPost, ActionName("DeleteTask")]
-            public IActionResult DeletePOST(int? taskId)
+            return View();
+        }
+    
+        public IActionResult Edit(int? id)
+        {
+            if(id == null || id == 0)
             {
-                TaskModel? taskModelFromDb = _db.Tasks.Find(taskId);
-                if (taskModelFromDb == null)
-                {
-                    return NotFound();
-                }
-                _db.Tasks.Remove(taskModelFromDb);
+                return NotFound();
+            }
+            TaskModel? taskModelFromDb = _db.Tasks.Find(id);
+            if(taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(taskModelFromDb);
+        }
+    
+        [HttpPost]
+        public IActionResult Edit(TaskModel taskModelObj)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Tasks.Update(taskModelObj);
                 _db.SaveChanges();
+                TempData["success"] = "Task updated successfully";
                 return RedirectToAction("Index", "ToDo");
             }
-        
-            [HttpPost]
-            public IActionResult ToggleCompletion(int taskId)
+            return View();
+        }
+    
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
             {
-                TaskModel taskModelFromDb = _db.Tasks.Find(taskId);
-                if (taskModelFromDb == null)
-                {
-                    return Json(new { Success = false });
-                }
-                taskModelFromDb.isComplete = !taskModelFromDb.isComplete;
-                _db.SaveChanges();
-        
-                //return RedirectToAction("Index", "ToDo");
-                return Json(new { success = true, isComplete = taskModelFromDb.isComplete });
+                return NotFound();
             }
+            TaskModel? taskModelFromDb = _db.Tasks.Find(id);
+            if (taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+    
+            return RedirectToAction("Index", "ToDo");
+        }
+    
+        [HttpPost, ActionName("DeleteTask")]
+        public IActionResult DeletePOST(int? taskId)
+        {
+            TaskModel? taskModelFromDb = _db.Tasks.Find(taskId);
+            if (taskModelFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.Tasks.Remove(taskModelFromDb);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "ToDo");
         }
         
 <h1 id="Additional Features">Additional Features</h1>
 <ul>
-  <li><h5>Sorting Options</h5></li>
+  <li><h4>Sorting Options</h4></li>
 </ul>
+    <p>To provide users with greater control over their to-do list, I implemented the option to sort tasks based on the properties of the task model. Users can easily arrange tasks in ascending or descending order by selecting the filter option and then choosing the desired property.</p>
+
+    ![ToDo Sorting Gif](https://github.com/Anthony15651/To-Do-App/blob/main/GIFs/ToDoSorting.gif)
 <ul>
-  <li>Toastr Notifications</li>
+  <li><h4>Toastr Notifications</h4></li>
 </ul>
 
 <h1 id="Key Takeaways">Key Takeaways</h1>
