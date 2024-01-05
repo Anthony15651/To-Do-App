@@ -44,10 +44,10 @@ namespace To_Do_App.Models
 
     public enum Category
     {
+        Other,
         Work,
         Home,
         School,
-        Appointment,
-        Other
+        Appointment
     }
 }
